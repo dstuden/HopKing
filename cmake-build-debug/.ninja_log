@@ -1,0 +1,8 @@
+# ninja log v5
+0	496	1646928625730491809	CMakeFiles/HopKing.dir/main.cpp.o	aca63c8b3832779f
+1	62	1646940192654944321	CMakeFiles/HopKing.dir/src/scenes/GameScene.cpp.o	9e78034ba38d3ee
+1	471	1646926626025346270	CMakeFiles/HopKing.dir/src/utils/InputManager.cpp.o	4d031a669990fed
+1	10	1646940192601609881	CMakeFiles/HopKing.dir/src/entities/GameObject.cpp.o	c9bd9acb96638857
+1	581	1646928625813826924	CMakeFiles/HopKing.dir/src/utils/TextureManager.cpp.o	a11de4908e01e619
+62	126	1646940192714945565	HopKing	b821cc86db8c8217
+1	530	1646928625763825855	CMakeFiles/HopKing.dir/src/Engine.cpp.o	462b61933ada4a77
