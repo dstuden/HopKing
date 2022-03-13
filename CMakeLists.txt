@@ -3,7 +3,7 @@ project(HopKing)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(${PROJECT_NAME} main.cpp src/Engine.cpp src/Engine.h src/utils/InputManager.cpp src/utils/InputManager.h src/utils/TextureManager.cpp src/utils/TextureManager.h src/entities/GameObject.cpp src/entities/GameObject.h src/scenes/GameScene.cpp src/scenes/GameScene.h src/utils/Vector2D.cpp src/utils/Vector2D.h)
+add_executable(${PROJECT_NAME} main.cpp src/Engine.cpp src/Engine.h src/utils/InputManager.cpp src/utils/InputManager.h src/utils/TextureManager.cpp src/utils/TextureManager.h src/entities/GameObject.cpp src/entities/GameObject.h src/scenes/GameScene.h src/utils/Vector2D.cpp src/utils/Vector2D.h src/scenes/SceneManager.cpp src/scenes/SceneManager.h src/scenes/MenuScene.cpp src/scenes/MenuScene.h src/entities/Player.cpp src/entities/Player.h)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 find_package(SDL2 REQUIRED)

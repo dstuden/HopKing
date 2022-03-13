@@ -11,9 +11,6 @@ protected:
     Vector2D velocity;
     Vector2D position;
 
-    int x;
-    int y;
-
     int texture_width;
     int texture_height;
 
@@ -24,10 +21,17 @@ protected:
 
 public:
     GameObject() = default;
+
     ~GameObject() = default;
 
     virtual void Update() = 0;
+
     virtual void Draw() = 0;
-    virtual void Clean() = 0;
+
+    virtual bool IsDead() {
+        return dead;
+    }
+
+    virtual void Free() = 0;
 };
 

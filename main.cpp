@@ -1,10 +1,11 @@
 #include <iostream>
 #include "src/Engine.h"
+#include <vector>
+#include <memory>
 
 const float delay_ms = 16.6666666667f; // 60 fps
 
 int main() {
-
     if (
             !Engine::Instance()->Init
                     (

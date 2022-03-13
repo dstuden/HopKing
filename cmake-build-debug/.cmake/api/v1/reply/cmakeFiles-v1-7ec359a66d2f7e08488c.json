@@ -123,27 +123,27 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "/lib64/cmake/SDL2/SDL2ConfigVersion.cmake"
+			"path" : "/usr/lib64/cmake/SDL2/SDL2ConfigVersion.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/lib64/cmake/SDL2/SDL2Config.cmake"
+			"path" : "/usr/lib64/cmake/SDL2/SDL2Config.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/lib64/cmake/SDL2/SDL2Targets.cmake"
+			"path" : "/usr/lib64/cmake/SDL2/SDL2Targets.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/lib64/cmake/SDL2/SDL2Targets-noconfig.cmake"
+			"path" : "/usr/lib64/cmake/SDL2/SDL2Targets-noconfig.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/lib64/cmake/SDL2/SDL2mainTargets.cmake"
+			"path" : "/usr/lib64/cmake/SDL2/SDL2mainTargets.cmake"
 		},
 		{
 			"isExternal" : true,
-			"path" : "/lib64/cmake/SDL2/SDL2mainTargets-noconfig.cmake"
+			"path" : "/usr/lib64/cmake/SDL2/SDL2mainTargets-noconfig.cmake"
 		},
 		{
 			"path" : "cmake/FindSDL2_image.cmake"

@@ -49,12 +49,14 @@ void TextureManager::Draw(std::string ID, int x, int y, int width, int height, S
 }
 
 void TextureManager::FreeFromTextureMap(std::string ID) {
+    SDL_DestroyTexture(texture_map.at(ID));
     texture_map.erase(ID);
 }
 
 void TextureManager::Free() {
-    for(auto &it : texture_map) {
+    for (auto &it: texture_map) {
         SDL_DestroyTexture(it.second);
     }
-    delete this;
+    texture_map.clear();
+    delete instance;
 }

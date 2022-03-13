@@ -1,8 +1,11 @@
 # ninja log v5
-0	496	1646928625730491809	CMakeFiles/HopKing.dir/main.cpp.o	aca63c8b3832779f
-1	62	1646940192654944321	CMakeFiles/HopKing.dir/src/scenes/GameScene.cpp.o	9e78034ba38d3ee
-1	471	1646926626025346270	CMakeFiles/HopKing.dir/src/utils/InputManager.cpp.o	4d031a669990fed
-1	10	1646940192601609881	CMakeFiles/HopKing.dir/src/entities/GameObject.cpp.o	c9bd9acb96638857
-1	581	1646928625813826924	CMakeFiles/HopKing.dir/src/utils/TextureManager.cpp.o	a11de4908e01e619
-62	126	1646940192714945565	HopKing	b821cc86db8c8217
-1	530	1646928625763825855	CMakeFiles/HopKing.dir/src/Engine.cpp.o	462b61933ada4a77
+1	1022	1647101580311376932	CMakeFiles/HopKing.dir/main.cpp.o	80566eb1872571d9
+3	131	1647086047912767264	CMakeFiles/HopKing.dir/src/scenes/GameScene.cpp.o	5fe86c390082478b
+1	1271	1647193081966546126	CMakeFiles/HopKing.dir/src/scenes/MenuScene.cpp.o	3e8d403b966ad072
+1	406	1647193072076600397	CMakeFiles/HopKing.dir/src/scenes/SceneManager.cpp.o	533e372bfe85f9dd
+2	892	1647086048672763093	CMakeFiles/HopKing.dir/src/utils/InputManager.cpp.o	2e0e432931ea552e
+2	21	1647100940434888220	CMakeFiles/HopKing.dir/src/entities/GameObject.cpp.o	31d3a474acc89115
+3	56	1647086047836101018	CMakeFiles/HopKing.dir/src/utils/Vector2D.cpp.o	432faf353589c85f
+1	1167	1647193072839929541	CMakeFiles/HopKing.dir/src/utils/TextureManager.cpp.o	30f8be487c3f89a8
+1271	1439	1647193082133211878	HopKing	a2c50382e48f09f7
+2	983	1647086048766095914	CMakeFiles/HopKing.dir/src/Engine.cpp.o	292a30fc2430009
