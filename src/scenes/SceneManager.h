@@ -4,7 +4,7 @@
 #include <vector>
 
 class SceneManager {
-    std::vector<GameScene *> *game_scenes;
+    std::vector<GameScene *> game_scenes;
 
     static SceneManager *instance;
 
@@ -21,9 +21,13 @@ public:
 
     void PopScene();
 
-    void ChangeScene(GameScene scene);
+    void ChangeScene(GameScene *scene);
 
-    void PushScene(GameScene scene);
+    void PushScene(GameScene *scene);
 
     void CleanScenes();
+
+    void Update();
+
+    void Render();
 };

@@ -3,14 +3,14 @@
 #include "GameObject.h"
 #include <iostream>
 
-class Player : public GameObject {
+class Enemy : public GameObject {
     int lives;
 
     bool invulnerable = false;
     uint32_t invulnerable_start;
 
 public:
-    Player(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
+    Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
            int num_frames, std::string texture_ID, int lives);
 
     virtual void Update() override;
@@ -21,9 +21,9 @@ public:
 
     void AddLife();
 
-    bool CheckCollision(GameScene *parrent);
+    void CheckCollision(GameScene *parrent);
 
-    bool IsInVoulnerable() { return invulnerable; }
+    bool IsInVoulnerable() const { return invulnerable; }
 
     void Invoulnerable() { invulnerable = true; }
 

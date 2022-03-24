@@ -1,4 +1,6 @@
 #include "Engine.h"
+#include "scenes/SceneManager.h"
+#include "scenes/Scenes.h"
 
 Engine *Engine::instance = NULL;
 
@@ -35,15 +37,14 @@ bool Engine::Init(const char *title, int width, int height, int flags) {
     }
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    TextureManager::Instance()->Load("../assets/player.png", "player", renderer);
+    SceneManager::Instance()->PushScene(new MenuScene);
 
     running = true;
     return true;
 }
 
 void Engine::Update() {
-    if(InputManager::Instance()->GetKeyState(SDL_SCANCODE_RETURN))
-        std::cout<<"Return Pressed!\n";
+    SceneManager::Instance()->Update();
 }
 
 void Engine::HandleEvents() {
@@ -63,16 +64,18 @@ void Engine::HandleEvents() {
 void Engine::Render() {
     SDL_RenderClear(renderer);
 
-    TextureManager::Instance()->Draw("player", 200, 200, 64, 64, renderer, 0, SDL_FLIP_NONE);
+    SceneManager::Instance()->Render();
 
     SDL_RenderPresent(renderer);
 }
 
 void Engine::Free() {
+    std::cout << "\nCleaning up...\n";
+
     TextureManager::Instance()->Free();
     InputManager::Instance()->Free();
+    SceneManager::Instance()->CleanScenes();
 
-    std::cout << "\nCleaning up...\n";
     SDL_DestroyRenderer(renderer);
     std::cout << "Renderer destroyed!\n";
     SDL_DestroyWindow(window);

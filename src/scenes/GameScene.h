@@ -2,9 +2,13 @@
 
 #include "../entities/GameObject.h"
 #include <string>
-#include <memory>
+#include <vector>
 
 class GameScene {
+protected:
+    std::vector<std::string> texture_id_list;
+    std::vector<GameObject *> game_objects;
+
 public:
 
     GameScene() = default;
@@ -18,5 +22,9 @@ public:
     virtual void OnExit() {}
 
     virtual void OnEnter() {}
+
+    virtual std::string GetStateID() { return ""; }
+
+    std::vector<GameObject *> GetGameObjects() { return game_objects; }
 };
 

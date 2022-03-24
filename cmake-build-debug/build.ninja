@@ -100,13 +100,6 @@ build CMakeFiles/HopKing.dir/src/utils/TextureManager.cpp.o: CXX_COMPILER__HopKi
   OBJECT_DIR = CMakeFiles/HopKing.dir
   OBJECT_FILE_DIR = CMakeFiles/HopKing.dir/src/utils
 
-build CMakeFiles/HopKing.dir/src/entities/GameObject.cpp.o: CXX_COMPILER__HopKing_Debug /home/david/Documents/HopKing/src/entities/GameObject.cpp || cmake_object_order_depends_target_HopKing
-  DEP_FILE = CMakeFiles/HopKing.dir/src/entities/GameObject.cpp.o.d
-  FLAGS = -g -std=gnu++14
-  INCLUDES = -I/usr/include/SDL2
-  OBJECT_DIR = CMakeFiles/HopKing.dir
-  OBJECT_FILE_DIR = CMakeFiles/HopKing.dir/src/entities
-
 build CMakeFiles/HopKing.dir/src/utils/Vector2D.cpp.o: CXX_COMPILER__HopKing_Debug /home/david/Documents/HopKing/src/utils/Vector2D.cpp || cmake_object_order_depends_target_HopKing
   DEP_FILE = CMakeFiles/HopKing.dir/src/utils/Vector2D.cpp.o.d
   FLAGS = -g -std=gnu++14
@@ -135,6 +128,20 @@ build CMakeFiles/HopKing.dir/src/entities/Player.cpp.o: CXX_COMPILER__HopKing_De
   OBJECT_DIR = CMakeFiles/HopKing.dir
   OBJECT_FILE_DIR = CMakeFiles/HopKing.dir/src/entities
 
+build CMakeFiles/HopKing.dir/src/entities/Button.cpp.o: CXX_COMPILER__HopKing_Debug /home/david/Documents/HopKing/src/entities/Button.cpp || cmake_object_order_depends_target_HopKing
+  DEP_FILE = CMakeFiles/HopKing.dir/src/entities/Button.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I/usr/include/SDL2
+  OBJECT_DIR = CMakeFiles/HopKing.dir
+  OBJECT_FILE_DIR = CMakeFiles/HopKing.dir/src/entities
+
+build CMakeFiles/HopKing.dir/src/entities/Enemy.cpp.o: CXX_COMPILER__HopKing_Debug /home/david/Documents/HopKing/src/entities/Enemy.cpp || cmake_object_order_depends_target_HopKing
+  DEP_FILE = CMakeFiles/HopKing.dir/src/entities/Enemy.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I/usr/include/SDL2
+  OBJECT_DIR = CMakeFiles/HopKing.dir
+  OBJECT_FILE_DIR = CMakeFiles/HopKing.dir/src/entities
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target HopKing
@@ -143,7 +150,7 @@ build CMakeFiles/HopKing.dir/src/entities/Player.cpp.o: CXX_COMPILER__HopKing_De
 #############################################
 # Link the executable HopKing
 
-build HopKing: CXX_EXECUTABLE_LINKER__HopKing_Debug CMakeFiles/HopKing.dir/main.cpp.o CMakeFiles/HopKing.dir/src/Engine.cpp.o CMakeFiles/HopKing.dir/src/utils/InputManager.cpp.o CMakeFiles/HopKing.dir/src/utils/TextureManager.cpp.o CMakeFiles/HopKing.dir/src/entities/GameObject.cpp.o CMakeFiles/HopKing.dir/src/utils/Vector2D.cpp.o CMakeFiles/HopKing.dir/src/scenes/SceneManager.cpp.o CMakeFiles/HopKing.dir/src/scenes/MenuScene.cpp.o CMakeFiles/HopKing.dir/src/entities/Player.cpp.o | /usr/lib/libSDL2main.a /usr/lib/libSDL2-2.0.so.0.18.2 /usr/lib/libSDL2_image.so
+build HopKing: CXX_EXECUTABLE_LINKER__HopKing_Debug CMakeFiles/HopKing.dir/main.cpp.o CMakeFiles/HopKing.dir/src/Engine.cpp.o CMakeFiles/HopKing.dir/src/utils/InputManager.cpp.o CMakeFiles/HopKing.dir/src/utils/TextureManager.cpp.o CMakeFiles/HopKing.dir/src/utils/Vector2D.cpp.o CMakeFiles/HopKing.dir/src/scenes/SceneManager.cpp.o CMakeFiles/HopKing.dir/src/scenes/MenuScene.cpp.o CMakeFiles/HopKing.dir/src/entities/Player.cpp.o CMakeFiles/HopKing.dir/src/entities/Button.cpp.o CMakeFiles/HopKing.dir/src/entities/Enemy.cpp.o | /usr/lib/libSDL2main.a /usr/lib/libSDL2-2.0.so.0.18.2 /usr/lib/libSDL2_image.so
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib/libSDL2main.a  /usr/lib/libSDL2-2.0.so.0.18.2  /usr/lib/libSDL2_image.so
   OBJECT_DIR = CMakeFiles/HopKing.dir
@@ -172,14 +179,14 @@ build all: phony HopKing
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../cmake/FindSDL2_image.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake /usr/lib64/cmake/SDL2/SDL2Config.cmake /usr/lib64/cmake/SDL2/SDL2ConfigVersion.cmake /usr/lib64/cmake/SDL2/SDL2Targets-noconfig.cmake /usr/lib64/cmake/SDL2/SDL2Targets.cmake /usr/lib64/cmake/SDL2/SDL2mainTargets-noconfig.cmake /usr/lib64/cmake/SDL2/SDL2mainTargets.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../cmake/FindSDL2_image.cmake /lib64/cmake/SDL2/SDL2Config.cmake /lib64/cmake/SDL2/SDL2ConfigVersion.cmake /lib64/cmake/SDL2/SDL2Targets-noconfig.cmake /lib64/cmake/SDL2/SDL2Targets.cmake /lib64/cmake/SDL2/SDL2mainTargets-noconfig.cmake /lib64/cmake/SDL2/SDL2mainTargets.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../cmake/FindSDL2_image.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake /usr/lib64/cmake/SDL2/SDL2Config.cmake /usr/lib64/cmake/SDL2/SDL2ConfigVersion.cmake /usr/lib64/cmake/SDL2/SDL2Targets-noconfig.cmake /usr/lib64/cmake/SDL2/SDL2Targets.cmake /usr/lib64/cmake/SDL2/SDL2mainTargets-noconfig.cmake /usr/lib64/cmake/SDL2/SDL2mainTargets.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../cmake/FindSDL2_image.cmake /lib64/cmake/SDL2/SDL2Config.cmake /lib64/cmake/SDL2/SDL2ConfigVersion.cmake /lib64/cmake/SDL2/SDL2Targets-noconfig.cmake /lib64/cmake/SDL2/SDL2Targets.cmake /lib64/cmake/SDL2/SDL2mainTargets-noconfig.cmake /lib64/cmake/SDL2/SDL2mainTargets.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCXXInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeCommonLanguageInclude.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeGenericSystem.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeInitializeConfigs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeLanguageInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInformation.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/CMakeSystemSpecificInitialize.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Compiler/GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageMessage.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-C.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU-CXX.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux-GNU.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/Linux.cmake /opt/clion/bin/cmake/linux/share/cmake-3.21/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.21.1/CMakeCCompiler.cmake CMakeFiles/3.21.1/CMakeCXXCompiler.cmake CMakeFiles/3.21.1/CMakeSystem.cmake: phony
 
 
 #############################################

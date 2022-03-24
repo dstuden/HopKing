@@ -9,6 +9,7 @@ void MenuScene::Update() {
     for (int i = 0; i < max_size;) {
         if (game_objects[i]->IsDead()) {
             game_objects[i]->Free();
+            delete game_objects[i];
             game_objects.erase(game_objects.begin() + i);
             max_size--; // not really necessary
         } else {
@@ -19,19 +20,81 @@ void MenuScene::Update() {
 }
 
 void MenuScene::Draw() {
-
+    for (auto &it: game_objects) {
+        it->Draw();
+    }
 }
 
 void MenuScene::OnEnter() {
-    game_objects.emplace_back(std::unique_ptr<GameObject>());
+    TextureManager::Instance()->Load("../assets/player.png", "player", Engine::Instance()->getRenderer());
+    texture_id_list.push_back("player");
 
-    TextureManager::Instance()->Load("../a", ID, Engine::Instance()->getRenderer());
+    Player *player = new Player(
+            this,
+            100,
+            300,
+            64,
+            64,
+            500,
+            2,
+            "player",
+            3
+    );
 
+    Enemy *enemy = new Enemy(
+            this,
+            100,
+            600,
+            64,
+            64,
+            1,
+            2,
+            "player",
+            3
+    );
+
+    Enemy *enemy2 = new Enemy(
+            this,
+            400,
+            600,
+            64,
+            64,
+            1,
+            2,
+            "player",
+            3
+    );
+    Enemy *enemy3 = new Enemy(
+            this,
+            600,
+            600,
+            64,
+            64,
+            1,
+            2,
+            "player",
+            3
+    );
+
+
+    game_objects.push_back(player);
+    game_objects.push_back(enemy);
+    game_objects.push_back(enemy2);
+    game_objects.push_back(enemy3);
+
+    std::cout << "Entered menu!\n\n";
 }
 
 void MenuScene::OnExit() {
-    game_objects.clear();
+    for (int i = 0; i <= game_objects.size(); i++) {
+        game_objects.back()->Free();
+        delete game_objects.back();
+        game_objects.pop_back();
+    }
 
-    TextureManager::Instance()->Free();
+    for(auto &it : texture_id_list)
+        TextureManager::Instance()->FreeFromTextureMap(it);
 
 }
+
+std::string MenuScene::GetStateID() { return ID; }

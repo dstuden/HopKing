@@ -10,8 +10,8 @@ int main() {
             !Engine::Instance()->Init
                     (
                             "Hop King",
-                            800,
-                            640,
+                            1024,
+                            768,
                             0
                     )
             )
@@ -31,9 +31,9 @@ int main() {
 
         SDL_Delay(delay_ms - (elapsed_ms >= delay_ms ? 0 : elapsed_ms));
 
-//        end = SDL_GetPerformanceCounter();
-//        float elapsed = (end - start) / (float) SDL_GetPerformanceFrequency();
-//        std::cout << "Current FPS: " << std::to_string(1.0f / elapsed) << std::endl;
+        end = SDL_GetPerformanceCounter();
+        float elapsed = (end - start) / (float) SDL_GetPerformanceFrequency();
+        std::cout << "Current FPS: " << std::to_string(1.0f / elapsed) << std::endl;
     }
 
     Engine::Instance()->Free();

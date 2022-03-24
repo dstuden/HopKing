@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../utils/Vector2D.h"
+#include <SDL2/SDL.h>
+#include <iostream>
 
 class GameScene;
 
@@ -11,18 +13,32 @@ protected:
     Vector2D velocity;
     Vector2D position;
 
-    int texture_width;
-    int texture_height;
+    int width;
+    int height;
 
-    int animation_speed;
-    int num_frames;
+    SDL_Rect
+            src_rect,
+            dest_rect;
 
-    bool dead;
+    int animation_speed = 1;
+    int num_frames = 1;
+    int current_frame = 0;
+
+    std::string texture_ID;
+
+    bool dead = false;
+
+    Uint32 ID;
 
 public:
-    GameObject() = default;
+    GameObject() {
+        static int getID = 0;
+        ID = getID++;
+    }
 
-    ~GameObject() = default;
+    ~GameObject() {
+        std::cout << "Destroyed game object!\n";
+    }
 
     virtual void Update() = 0;
 
@@ -31,6 +47,10 @@ public:
     virtual bool IsDead() {
         return dead;
     }
+
+    int GetID() { return ID; }
+
+    virtual SDL_Rect *GetRect() { return &dest_rect; }
 
     virtual void Free() = 0;
 };

@@ -2,12 +2,12 @@
 
 #include "GameScene.h"
 #include "../utils/TextureManager.h"
+#include "../entities/Entities.h"
 #include <vector>
 
 class MenuScene : public GameScene {
 
     static std::string ID;
-    std::vector<std::unique_ptr<GameObject>> game_objects;
 
 public:
     void Update() override;
@@ -17,4 +17,6 @@ public:
     void OnEnter() override;
 
     void OnExit() override;
+
+    std::string GetStateID() override;
 };
