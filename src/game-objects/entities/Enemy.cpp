@@ -1,11 +1,13 @@
 #include "Enemy.h"
-#include "../Engine.h"
-#include "../utils/TextureManager.h"
-#include "../utils/InputManager.h"
-#include "../scenes/Scenes.h"
+#include "../../Engine.h"
+#include "../../utils/TextureManager.h"
+#include "../../utils/InputManager.h"
+#include "../../scenes/Scenes.h"
 
 Enemy::Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
              int num_frames, std::string texture_ID, int lives) {
+    object_ID = "Enemy";
+
     this->parrent_scene = parrent_scene;
 
     position.setX(x);
@@ -25,6 +27,8 @@ Enemy::Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int 
 }
 
 void Enemy::Update() {
+    CheckCollision(parrent_scene);
+
     velocity.setX(0);
     velocity.setY(0);
 
@@ -34,7 +38,7 @@ void Enemy::Update() {
 }
 
 void Enemy::Draw() {
-    TextureManager::Instance()->Draw(texture_ID, position.getX(), position.getY(), width, height, &src_rect, &dest_rect,
+    TextureManager::Instance()->Draw(texture_ID, position.getX(), position.getY(), width, height, &dest_rect,
                                      Engine::Instance()->getRenderer(), current_frame, SDL_FLIP_NONE);
 }
 
@@ -42,8 +46,12 @@ void Enemy::Free() {
     dead = true;
 }
 
-void Enemy::CheckCollision(GameScene *parrent) {
+bool Enemy::CheckCollision(GameScene *parrent) {
+    for (auto &it: parrent->GetGameObjects()) {
+        if (this->GetID() != it->GetID()) {
 
+        }
+    }
 }
 
 void Enemy::AddLife() {

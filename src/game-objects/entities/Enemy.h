@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.h"
+#include "../GameObject.h"
 #include <iostream>
 
 class Enemy : public GameObject {
@@ -21,7 +21,7 @@ public:
 
     void AddLife();
 
-    void CheckCollision(GameScene *parrent);
+    bool CheckCollision(GameScene *parrent);
 
     bool IsInVoulnerable() const { return invulnerable; }
 

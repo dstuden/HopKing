@@ -25,7 +25,7 @@ public:
 
     bool Load(std::string path, std::string ID, SDL_Renderer *renderer);
 
-    void Draw(std::string ID, int x, int y, int width, int height, SDL_Rect *src_rect, SDL_Rect *dest_rect, SDL_Renderer *renderer,
+    void Draw(std::string ID, int x, int y, int width, int height, SDL_Rect *dest_rect, SDL_Renderer *renderer,
               int frame,
               SDL_RendererFlip texture_flip);
 

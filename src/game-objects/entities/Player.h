@@ -1,14 +1,9 @@
 #pragma once
 
-#include "GameObject.h"
+#include "../GameObject.h"
 #include <iostream>
 
 class Player : public GameObject {
-    int lives;
-
-    bool invulnerable = false;
-    uint32_t invulnerable_start;
-
 public:
     Player(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
            int num_frames, std::string texture_ID, int lives);
@@ -21,9 +16,9 @@ public:
 
     void AddLife();
 
-    bool CheckCollision(GameScene *parrent);
+    bool CheckCollision();
 
-    bool IsInVoulnerable() { return invulnerable; }
+    bool isInvoulnerable() { return invulnerable; }
 
     void Invoulnerable() { invulnerable = true; }
 

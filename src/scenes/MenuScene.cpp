@@ -4,7 +4,17 @@
 
 std::string MenuScene::ID = "MENU";
 
+int num_of_buttons = 0;
+
 void MenuScene::Update() {
+    static int button = 0;
+
+// need to check for release of a key...
+//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_K) && button < num_of_buttons - 1)
+//        button++;
+//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_J) && button > 0)
+//        button--;
+
     int max_size = game_objects.size();
     for (int i = 0; i < max_size;) {
         if (game_objects[i]->IsDead()) {
@@ -17,6 +27,8 @@ void MenuScene::Update() {
             i++;
         }
     }
+
+    std::cout << button << std::endl;
 }
 
 void MenuScene::Draw() {
@@ -26,61 +38,37 @@ void MenuScene::Draw() {
 }
 
 void MenuScene::OnEnter() {
-    TextureManager::Instance()->Load("../assets/player.png", "player", Engine::Instance()->getRenderer());
-    texture_id_list.push_back("player");
+    TextureManager::Instance()->Load("../assets/play-button.png", "play-button", Engine::Instance()->getRenderer());
+    texture_id_list.push_back("play-button");
 
-    Player *player = new Player(
+    Button *button1 = new Button(
             this,
             100,
             300,
+            128,
             64,
-            64,
-            500,
-            2,
-            "player",
-            3
+            1,
+            1,
+            "play-button"
     );
 
-    Enemy *enemy = new Enemy(
+    Button *button2 = new Button(
             this,
             100,
-            600,
-            64,
-            64,
-            1,
-            2,
-            "player",
-            3
-    );
-
-    Enemy *enemy2 = new Enemy(
-            this,
-            400,
-            600,
-            64,
+            500,
+            128,
             64,
             1,
-            2,
-            "player",
-            3
-    );
-    Enemy *enemy3 = new Enemy(
-            this,
-            600,
-            600,
-            64,
-            64,
             1,
-            2,
-            "player",
-            3
+            "play-button"
     );
 
+    game_objects.push_back(button1);
+    game_objects.push_back(button2);
 
-    game_objects.push_back(player);
-    game_objects.push_back(enemy);
-    game_objects.push_back(enemy2);
-    game_objects.push_back(enemy3);
+    for (auto &it: game_objects)
+        if (it->GetObjectID() == "Button")
+            num_of_buttons++;
 
     std::cout << "Entered menu!\n\n";
 }
@@ -92,7 +80,7 @@ void MenuScene::OnExit() {
         game_objects.pop_back();
     }
 
-    for(auto &it : texture_id_list)
+    for (auto &it: texture_id_list)
         TextureManager::Instance()->FreeFromTextureMap(it);
 
 }

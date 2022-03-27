@@ -16,9 +16,7 @@ protected:
     int width;
     int height;
 
-    SDL_Rect
-            src_rect,
-            dest_rect;
+    SDL_Rect dest_rect;
 
     int animation_speed = 1;
     int num_frames = 1;
@@ -29,6 +27,11 @@ protected:
     bool dead = false;
 
     Uint32 ID;
+    std::string object_ID;
+
+    int lives = 0; // object is still alive at 0 lives
+    bool invulnerable = false;
+    uint32_t invulnerable_start;
 
 public:
     GameObject() {
@@ -49,6 +52,8 @@ public:
     }
 
     int GetID() { return ID; }
+
+    std::string GetObjectID() { return object_ID; }
 
     virtual SDL_Rect *GetRect() { return &dest_rect; }
 

@@ -2,7 +2,7 @@
 
 #include "GameScene.h"
 #include "../utils/TextureManager.h"
-#include "../entities/Entities.h"
+#include "../game-objects/Entities.h"
 #include <vector>
 
 class MenuScene : public GameScene {
