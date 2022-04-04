@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "../EntityObject.h"
 #include <iostream>
 
-class Button : public GameObject {
+class Button : public EntityObject {
     bool selected = false;
 public:
     Button(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,

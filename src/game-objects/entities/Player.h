@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "../EntityObject.h"
 #include <iostream>
 
-class Player : public GameObject {
+class Player : public EntityObject {
 public:
     Player(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
            int num_frames, std::string texture_ID, int lives);
@@ -13,10 +13,8 @@ public:
     virtual void Draw() override;
 
     virtual void Free() override;
-
-    void AddLife();
-
-    bool CheckCollision();
+    
+    void CheckCollision();
 
     bool isInvoulnerable() { return invulnerable; }
 

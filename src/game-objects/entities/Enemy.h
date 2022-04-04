@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "../EntityObject.h"
 #include <iostream>
 
-class Enemy : public GameObject {
+class Enemy : public EntityObject {
     int lives;
 
     bool invulnerable = false;
@@ -19,9 +19,7 @@ public:
 
     virtual void Free() override;
 
-    void AddLife();
-
-    bool CheckCollision(GameScene *parrent);
+    void CheckCollision();
 
     bool IsInVoulnerable() const { return invulnerable; }
 

@@ -1,6 +1,4 @@
 #include "Player.h"
-#include "../../Engine.h"
-#include "../../utils/TextureManager.h"
 #include "../../utils/InputManager.h"
 #include "../../scenes/Scenes.h"
 
@@ -16,47 +14,59 @@ Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, in
     this->height = height;
     this->width = width;
 
+    collider.w = width;
+    collider.h = height;
+
     this->animation_speed = animation_speed;
     this->num_frames = num_frames;
 
     this->texture_ID = texture_ID;
 
     this->lives = lives;
-
-    std::cout << "Created Player\n\n";
 }
 
 void Player::Update() {
-    CheckCollision();
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_D)) {
+        velocity.setX(5);
+    }
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_A)) {
+        velocity.setX(-5);
+    }
+
+    velocity.setY(0);
+    position.setX(position.getX() + velocity.getX());
+    collider.x = position.getX();
+    CheckCollision(); // one of the worst implementations
+
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_W)) {
+        velocity.setY(-5);
+    }
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_S)) {
+        velocity.setY(5);
+    }
 
     velocity.setX(0);
-    velocity.setY(0);
-
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_D)) velocity.setX(5);
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_A)) velocity.setX(-5);
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_W)) velocity.setY(-10);
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_S)) velocity.setY(10);
+    position.setY(position.getY() + velocity.getY());
+    collider.y = position.getY();
+    CheckCollision();
 
     current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
 
-    position += velocity;
 }
 
 void Player::Draw() {
-    TextureManager::Instance()->Draw(texture_ID, position.getX(), position.getY(), width, height, &dest_rect,
-                                     Engine::Instance()->getRenderer(), current_frame, SDL_FLIP_NONE);
+    EntityObject::Draw();
 }
 
 void Player::Free() {
-    dead = true;
+    EntityObject::Free();
 }
 
-bool Player::CheckCollision() {
+void Player::CheckCollision() {
     for (auto &it: this->parrent_scene->GetGameObjects()) {
         if (this->GetID() == it->GetID()) continue;
 
-        SDL_Rect result;
-        if (SDL_IntersectRect(this->GetRect(), it->GetRect(), &result)) {
+        if (SDL_HasIntersection(this->GetRect(), it->GetRect())) {
             if (it->GetObjectID() == "Enemy") {
                 if (!isInvoulnerable()) {
                     if (--lives < 0)
@@ -70,19 +80,17 @@ bool Player::CheckCollision() {
                 }
             }
 
-            if (it->GetObjectID() == "HealthUp") {
-                this->AddLife();
+            if (it->GetObjectID() == "LifeUp") {
+                EntityObject::AddLife();
             }
 
-            if (it->GetObjectID() == "Enemy") {
-                std::cout << result.x << std::endl;
+            if (it->GetObjectID() == "Platform") {
+                position -= velocity;
+
+                collider.x = position.getX();
+                collider.y = position.getY();
             }
         }
-
     }
-}
-
-void Player::AddLife() {
-    lives++;
 }
 

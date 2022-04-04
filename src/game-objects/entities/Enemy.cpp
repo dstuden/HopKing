@@ -16,6 +16,9 @@ Enemy::Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int 
     this->height = height;
     this->width = width;
 
+    collider.w = width;
+    collider.h = height;
+
     this->animation_speed = animation_speed;
     this->num_frames = num_frames;
 
@@ -27,7 +30,7 @@ Enemy::Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int 
 }
 
 void Enemy::Update() {
-    CheckCollision(parrent_scene);
+    CheckCollision();
 
     velocity.setX(0);
     velocity.setY(0);
@@ -35,26 +38,24 @@ void Enemy::Update() {
     current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
 
     position += velocity;
+
+    collider.x = position.getX();
+    collider.y = position.getY();
 }
 
 void Enemy::Draw() {
-    TextureManager::Instance()->Draw(texture_ID, position.getX(), position.getY(), width, height, &dest_rect,
-                                     Engine::Instance()->getRenderer(), current_frame, SDL_FLIP_NONE);
+    EntityObject::Draw();
 }
 
 void Enemy::Free() {
-    dead = true;
+    EntityObject::Free();
 }
 
-bool Enemy::CheckCollision(GameScene *parrent) {
-    for (auto &it: parrent->GetGameObjects()) {
+void Enemy::CheckCollision() {
+    for (auto &it: parrent_scene->GetGameObjects()) {
         if (this->GetID() != it->GetID()) {
 
         }
     }
-}
-
-void Enemy::AddLife() {
-    lives++;
 }
 

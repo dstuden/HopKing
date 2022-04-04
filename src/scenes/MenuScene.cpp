@@ -10,9 +10,9 @@ void MenuScene::Update() {
     static int button = 0;
 
 // need to check for release of a key...
-//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_K) && button < num_of_buttons - 1)
+//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_DOWN) && button < num_of_buttons - 1)
 //        button++;
-//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_J) && button > 0)
+//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_UP) && button > 0)
 //        button--;
 
     int max_size = game_objects.size();
@@ -27,8 +27,6 @@ void MenuScene::Update() {
             i++;
         }
     }
-
-    std::cout << button << std::endl;
 }
 
 void MenuScene::Draw() {
@@ -38,33 +36,36 @@ void MenuScene::Draw() {
 }
 
 void MenuScene::OnEnter() {
-    TextureManager::Instance()->Load("../assets/play-button.png", "play-button", Engine::Instance()->getRenderer());
-    texture_id_list.push_back("play-button");
+    TextureManager::Instance()->Load("../assets/player.png", "player", Engine::Instance()->getRenderer());
+    texture_id_list.push_back("playerd");
 
-    Button *button1 = new Button(
+    Player *player1 = new Player(
             this,
             100,
             300,
-            128,
             64,
-            1,
-            1,
-            "play-button"
+            64,
+            500,
+            2,
+            "player",
+            3
     );
 
-    Button *button2 = new Button(
+    Enemy *enemy1 = new Enemy(
             this,
             100,
             500,
-            128,
             64,
-            1,
-            1,
-            "play-button"
+            64,
+            500,
+            2,
+            "player",
+            1
     );
 
-    game_objects.push_back(button1);
-    game_objects.push_back(button2);
+
+    game_objects.push_back(enemy1);
+    game_objects.push_back(player1);
 
     for (auto &it: game_objects)
         if (it->GetObjectID() == "Button")

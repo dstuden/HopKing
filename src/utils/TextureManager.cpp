@@ -22,24 +22,25 @@ bool TextureManager::Load(std::string path, std::string ID, SDL_Renderer *render
     return false;
 }
 
-void TextureManager::Draw(std::string ID, int x, int y, int width, int height, SDL_Rect *dest_rect, SDL_Renderer *renderer,
+void TextureManager::Draw(std::string ID, int x, int y, int width, int height, SDL_Renderer *renderer,
                           int frame,
                           SDL_RendererFlip texture_flip = SDL_FLIP_NONE) {
     SDL_Rect src_rect;
-    src_rect.w = dest_rect->w = width;
-    src_rect.h = dest_rect->h = height;
+    SDL_Rect dest_rect;
+    src_rect.w = dest_rect.w = width;
+    src_rect.h = dest_rect.h = height;
 
     src_rect.x = width * frame;
     src_rect.y = 0;
 
-    dest_rect->x = x;
-    dest_rect->y = y;
+    dest_rect.x = x;
+    dest_rect.y = y;
 
     SDL_RenderCopyEx(
             renderer,
             texture_map[ID],
             &src_rect,
-            dest_rect,
+            &dest_rect,
             0,
             0,
             texture_flip
