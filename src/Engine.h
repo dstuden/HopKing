@@ -23,9 +23,10 @@ private:
 
     static Engine *instance;
 
-    Engine() =default;
+    Engine() = default;
 
 public:
+    SDL_Rect camera = {0, 0, 1024, 768};
 
     // Engine class will be a singleton
     static Engine *Instance() {

@@ -3,25 +3,18 @@
 SceneManager *SceneManager::instance = NULL;
 
 void SceneManager::ChangeScene(GameScene *scene) {
-    if (!game_scenes.empty()) {
-        if (game_scenes.back()->GetStateID() != scene->GetStateID()) {
-            game_scenes.back()->OnExit();
-            delete game_scenes.back();
-            game_scenes.pop_back();
-        }
-    }
-
+    PopScene();
     PushScene(scene);
     game_scenes.back()->OnEnter();
 }
 
 void SceneManager::CleanScenes() {
     if (!game_scenes.empty()) {
-        for (int i = 0; i <= game_scenes.size(); i++) {
-            game_scenes.back()->OnExit();
-            delete game_scenes.back();
-            game_scenes.pop_back();
+        for (auto &it: game_scenes) {
+            it->OnExit();
+            delete it;
         }
+        game_scenes.clear();
     }
 }
 
@@ -39,8 +32,15 @@ void SceneManager::PushScene(GameScene *scene) {
 }
 
 void SceneManager::Update() {
-    if (!game_scenes.empty())
-        game_scenes.back()->Update();
+    if (!game_scenes.empty()) {
+        if (game_scenes.back()->isDead())
+        {
+            delete game_scenes.back();
+            game_scenes.pop_back();
+        }
+        else
+            game_scenes.back()->Update();
+    }
 }
 
 void SceneManager::Render() {

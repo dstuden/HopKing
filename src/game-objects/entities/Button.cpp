@@ -34,8 +34,7 @@ void Button::Update() {
 }
 
 void Button::Draw() {
-    TextureManager::Instance()->Draw(texture_ID, position.getX(), position.getY(), width, height,
-                                     Engine::Instance()->getRenderer(), current_frame, SDL_FLIP_NONE);
+    EntityObject::Draw();
 }
 
 void Button::Free() {

@@ -59,6 +59,8 @@ void Engine::HandleEvents() {
                 break;
         }
     }
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_RETURN))
+        SceneManager::Instance()->PopScene();
 }
 
 void Engine::Render() {
@@ -70,18 +72,20 @@ void Engine::Render() {
 }
 
 void Engine::Free() {
-    std::cout << "\nCleaning up...\n";
+    std::cout << "\nCleaning up...\n\n";
 
     TextureManager::Instance()->Free();
+    std::cout << "Textures destroyed!\n";
     InputManager::Instance()->Free();
+    std::cout << "Input modules cleared!\n";
     SceneManager::Instance()->CleanScenes();
-
+    std::cout << "Scenes destroyed!\n";
     SDL_DestroyRenderer(renderer);
     std::cout << "Renderer destroyed!\n";
     SDL_DestroyWindow(window);
     std::cout << "Window destroyed!\n";
     SDL_Quit();
-    std::cout << "Cleanup successful!\n";
+    std::cout << "\nCleanup successful!\n";
 }
 
 SDL_Renderer *Engine::getRenderer() const {

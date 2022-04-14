@@ -1,12 +1,10 @@
-#include "MenuScene.h"
+#include "PlayScene.h"
 #include "../game-objects/Entities.h"
 #include "../Engine.h"
 
-std::string MenuScene::ID = "MENU";
+std::string PlayScene::ID = "PLAY";
 
-int num_of_buttons = 0;
-
-void MenuScene::Update() {
+void PlayScene::Update() {
     static int button = 0;
 
 // need to check for release of a key...
@@ -29,13 +27,13 @@ void MenuScene::Update() {
     }
 }
 
-void MenuScene::Draw() {
+void PlayScene::Draw() {
     for (auto &it: game_objects) {
         it->Draw();
     }
 }
 
-void MenuScene::OnEnter() {
+void PlayScene::OnEnter() {
     TextureManager::Instance()->Load("../assets/player.png", "player", Engine::Instance()->getRenderer());
     TextureManager::Instance()->Load("../assets/platform1.png", "platform1", Engine::Instance()->getRenderer());
     texture_id_list.push_back("player");
@@ -43,7 +41,7 @@ void MenuScene::OnEnter() {
 
     Player *player1 = new Player(
             this,
-            400,
+            100,
             300,
             32,
             64,
@@ -69,7 +67,7 @@ void MenuScene::OnEnter() {
             this,
             0,
             600,
-            1984,
+            640,
             64,
             1,
             1,
@@ -79,38 +77,35 @@ void MenuScene::OnEnter() {
     Platform *platform2 = new Platform(
             this,
             400,
-            350,
+            400,
             64,
-            180,
+            64,
             1,
             1,
             "platform1"
     );
+
+
     game_objects.push_back(platform1);
     game_objects.push_back(platform2);
     game_objects.push_back(enemy1);
     game_objects.push_back(player1);
 
-
-    for (auto &it: game_objects)
-        if (it->GetObjectID() == "Button")
-            num_of_buttons++;
-
     std::cout << "Entered menu!\n\n";
 }
 
-void MenuScene::OnExit() {
-    for (auto &it: game_objects) {
+void PlayScene::OnExit() {
+    for (auto &it : game_objects) {
         it->Free();
         delete it;
     }
     game_objects.clear();
 
-    for (auto &it: texture_id_list) {
+    for (auto &it: texture_id_list){
+        std::cout<<it<<std::endl;
         TextureManager::Instance()->FreeFromTextureMap(it);
-    }
 
-    dead = true;
+    }
 }
 
-std::string MenuScene::GetStateID() { return ID; }
+std::string PlayScene::GetStateID() { return ID; }

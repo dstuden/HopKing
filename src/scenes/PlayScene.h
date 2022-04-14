@@ -4,11 +4,13 @@
 #include "../utils/TextureManager.h"
 #include <vector>
 
-class MenuScene : public GameScene {
+class PlayScene : public GameScene {
 
     static std::string ID;
 
 public:
+    ~PlayScene() { std::cout << "Deleted Play Scene\n\n"; }
+
     void Update() override;
 
     void Draw() override;

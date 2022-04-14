@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../../utils/InputManager.h"
+#include "../../Engine.h"
 #include "../../scenes/Scenes.h"
 
 Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
@@ -26,32 +27,49 @@ Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, in
 }
 
 void Player::Update() {
+
+    if (lives <= 0) {
+        Free();
+        return;
+    }
+    parrent_scene->ChangeDirection(STILL);
+
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_D)) {
-        velocity.setX(5);
+        parrent_scene->ChangeDirection(LEFT);
     }
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_A)) {
-        velocity.setX(-5);
+        parrent_scene->ChangeDirection(RIGHT);
     }
 
-    velocity.setY(0);
-    position.setX(position.getX() + velocity.getX());
-    collider.x = position.getX();
-    CheckCollision(); // one of the worst implementations
+    int x_old = position.getX();
 
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_W)) {
-        velocity.setY(-5);
+    if (isFalling()) {
+        velocity.setY(15);
     }
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_S)) {
-        velocity.setY(5);
+
+    if (isJumping()) {
+        if (SDL_GetTicks() - jump_start < 250) {
+            velocity.setY(-15);
+        } else {
+            falling = true;
+            jumping = false;
+        }
     }
 
     velocity.setX(0);
     position.setY(position.getY() + velocity.getY());
     collider.y = position.getY();
+    collider.x = position.getX();
     CheckCollision();
 
-    current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_SPACE)) {
+        if (!isJumping() && !isFalling()) {
+            jumping = true;
+            jump_start = SDL_GetTicks();
+        }
+    }
 
+    current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
 }
 
 void Player::Draw() {
@@ -63,21 +81,27 @@ void Player::Free() {
 }
 
 void Player::CheckCollision() {
+    falling = true;
+
     for (auto &it: this->parrent_scene->GetGameObjects()) {
         if (this->GetID() == it->GetID()) continue;
 
         if (SDL_HasIntersection(this->GetRect(), it->GetRect())) {
             if (it->GetObjectID() == "Enemy") {
-                if (!isInvoulnerable()) {
-                    if (--lives < 0)
-                        Free();
+                if (velocity.getY() > 0 &&
+                    this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15) // 15 is the jump height
+                {
+                    it->Hit();
                     invulnerable = true;
+                    invulnerability_duration = 1000;
                     invulnerable_start = SDL_GetTicks();
                 } else {
-                    Uint32 invulnerable_now = SDL_GetTicks() - invulnerable_start;
-                    if (invulnerable_now > 1000)
-                        invulnerable = false;
+                    Hit(1000);
                 }
+
+                Uint32 invulnerable_now = SDL_GetTicks() - invulnerable_start;
+                if (invulnerable_now > invulnerability_duration)
+                    invulnerable = false;
             }
 
             if (it->GetObjectID() == "LifeUp") {
@@ -85,7 +109,24 @@ void Player::CheckCollision() {
             }
 
             if (it->GetObjectID() == "Platform") {
-                position -= velocity;
+                if (this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15) // 15 is the jump height
+                    falling = false;
+
+                if (velocity.getY() != 0 &&
+                    this->GetRect()->y + this->GetRect()->h >= it->GetRect()->y + it->GetRect()->h)
+                    jumping = false;
+
+
+                if (velocity.getY() > 0)
+                    velocity.setY((position.getY() + height) - it->GetPosition().getY());
+                if (velocity.getY() < 0)
+                    velocity.setY(position.getY() - (it->GetPosition().getY() + it->GetRect()->h));
+                if (velocity.getX() > 0)
+                    velocity.setX((position.getX() + width) - it->GetPosition().getX());
+                if (velocity.getX() < 0)
+                    velocity.setX(position.getX() - (it->GetPosition().getX() + it->GetRect()->w));
+
+                position -= velocity; // only for y
 
                 collider.x = position.getX();
                 collider.y = position.getY();

@@ -4,14 +4,11 @@
 #include <iostream>
 
 class Enemy : public EntityObject {
-    int lives;
-
-    bool invulnerable = false;
-    uint32_t invulnerable_start;
-
+    bool falling = true;
+    bool direction = false; // right = false, left = true
 public:
     Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
-           int num_frames, std::string texture_ID, int lives);
+          int num_frames, std::string texture_ID, int lives);
 
     virtual void Update() override;
 
@@ -21,14 +18,13 @@ public:
 
     void CheckCollision();
 
-    bool IsInVoulnerable() const { return invulnerable; }
+    bool isFalling() { return falling; }
 
-    void Invoulnerable() { invulnerable = true; }
-
-    void EnemyHit() {
-        if (!invulnerable) {
+    virtual void Hit() override {
+        if (!isInvoulnerable()) {
             lives--;
             invulnerable = true;
+            invulnerable_start = SDL_GetTicks();
         }
     }
 };

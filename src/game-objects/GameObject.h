@@ -5,6 +5,7 @@
 class GameScene;
 
 class GameObject {
+
 protected:
     GameScene *parrent_scene;
 
@@ -34,6 +35,8 @@ public:
         ID = getID++;
     }
 
+    virtual ~GameObject() = default;
+
     virtual void Update() = 0;
 
     virtual void Draw() = 0;
@@ -44,5 +47,16 @@ public:
 
     virtual SDL_Rect *GetRect() { return &collider; }
 
+    Vector2D GetPosition() { return position; }
+
+    Vector2D GetVelocity() { return velocity; }
+
+    virtual void Hit() = 0;
+    virtual void Hit(uint32_t invulnerability_duration) = 0;
+
     virtual void Free() = 0;
+
+    virtual bool IsDead() {
+        return dead;
+    }
 };
