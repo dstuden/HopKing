@@ -16,4 +16,6 @@ public:
     virtual void Draw() override;
 
     virtual void Free() override;
+
+    void CheckCollision();
 };

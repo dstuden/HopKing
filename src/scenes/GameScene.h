@@ -5,18 +5,12 @@
 
 class GameObject;
 
-enum {
-    STILL = 0,
-    RIGHT = 1,
-    LEFT = 2
-};
-
 class GameScene {
 protected:
     std::vector<std::string> texture_id_list;
     std::vector<GameObject *> game_objects;
     bool dead = false;
-    int direction = STILL;
+    int pos_diff_x = 0;
 
 public:
 
@@ -38,8 +32,8 @@ public:
 
     bool isDead() { return dead; }
 
-    void ChangeDirection(int direct) { direction = direct; }
+    void MoveScene(int diff) { pos_diff_x = diff; }
 
-    int Direction() { return direction; }
+    int ScenePos() { return pos_diff_x; }
 };
 

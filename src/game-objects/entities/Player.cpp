@@ -24,24 +24,33 @@ Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, in
     this->texture_ID = texture_ID;
 
     this->lives = lives;
+
+    collider.x = position.getX();
+    collider.y = position.getY();
 }
 
 void Player::Update() {
+    int x_old = position.getX();
 
     if (lives <= 0) {
         Free();
         return;
     }
-    parrent_scene->ChangeDirection(STILL);
 
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_D)) {
-        parrent_scene->ChangeDirection(LEFT);
+        velocity.setX(5);
     }
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_A)) {
-        parrent_scene->ChangeDirection(RIGHT);
+        velocity.setX(-5);
     }
 
-    int x_old = position.getX();
+    velocity.setY(0);
+    position.setX(position.getX() + velocity.getX());
+    collider.x = position.getX();
+    CheckCollision(); // only for calculating how much the map should move
+
+    parrent_scene->MoveScene(position.getX()-x_old);
+    position.setX(x_old);
 
     if (isFalling()) {
         velocity.setY(15);
@@ -59,7 +68,6 @@ void Player::Update() {
     velocity.setX(0);
     position.setY(position.getY() + velocity.getY());
     collider.y = position.getY();
-    collider.x = position.getX();
     CheckCollision();
 
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_SPACE)) {
@@ -109,7 +117,7 @@ void Player::CheckCollision() {
             }
 
             if (it->GetObjectID() == "Platform") {
-                if (this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15) // 15 is the jump height
+                if (this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15) // 15 is the jump velocity
                     falling = false;
 
                 if (velocity.getY() != 0 &&

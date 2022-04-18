@@ -27,6 +27,7 @@ public:
     void Free() override {
         collider.w = 0; // makes sure that other objects do not collide with this one before it gets destroyed
         collider.h = 0;
+        collider.x = collider.y = -10000;
 
         dead = true;
     }

@@ -26,25 +26,28 @@ Platform::Platform(GameScene *parrent_scene, int x, int y, int width, int height
 
 void Platform::Update() {
 
-    if(parrent_scene->Direction() == LEFT)
-        velocity.setX(-5);
-    else if(parrent_scene->Direction() == RIGHT)
-        velocity.setX(5);
-    else
-        velocity.setX(0);
-
-    position+=velocity;
-
-    current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
+    position.setX(position.getX() - parrent_scene->ScenePos());
 
     collider.x = position.getX();
     collider.y = position.getY();
 
+    current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
+
+}
+
+void Platform::CheckCollision() {
+    for (auto &it: this->parrent_scene->GetGameObjects()) {
+        if (this->GetObjectID() == it->GetObjectID()) continue;
+
+        if (SDL_HasIntersection(this->GetRect(), it->GetRect())) {
+
+        }
+    }
 }
 
 void Platform::Draw() {
     TextureManager::Instance()->DrawTile(texture_ID, position.getX(), position.getY(), 64, 64, width, height,
-                                           Engine::Instance()->getRenderer(), SDL_FLIP_NONE);
+                                         Engine::Instance()->getRenderer(), SDL_FLIP_NONE);
 }
 
 void Platform::Free() {

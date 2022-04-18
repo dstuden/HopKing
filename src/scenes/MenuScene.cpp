@@ -79,18 +79,17 @@ void MenuScene::OnEnter() {
     Platform *platform2 = new Platform(
             this,
             400,
-            350,
+            400,
             64,
-            180,
+            128,
             1,
             1,
             "platform1"
     );
+    game_objects.push_back(player1);
     game_objects.push_back(platform1);
     game_objects.push_back(platform2);
     game_objects.push_back(enemy1);
-    game_objects.push_back(player1);
-
 
     for (auto &it: game_objects)
         if (it->GetObjectID() == "Button")

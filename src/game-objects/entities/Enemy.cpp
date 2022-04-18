@@ -32,18 +32,9 @@ void Enemy::Update() {
     }
 
     if (direction) {
-        velocity.setX(-5);
-        if(parrent_scene->Direction()==RIGHT)
-            velocity.setX(0);
-        else if (parrent_scene->Direction()==LEFT)
-            velocity.setX(-10);
-    }
-    else if (!direction) {
-        velocity.setX(5);
-        if(parrent_scene->Direction()==RIGHT)
-            velocity.setX(10);
-        else if (parrent_scene->Direction()==LEFT)
-            velocity.setX(0);
+        velocity.setX(-5 - parrent_scene->ScenePos());
+    } else if (!direction) {
+        velocity.setX(5 - parrent_scene->ScenePos());
     }
 
     velocity.setY(0);
