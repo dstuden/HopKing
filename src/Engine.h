@@ -25,9 +25,9 @@ private:
 
     Engine() = default;
 
-public:
-    SDL_Rect camera = {0, 0, 1024, 768};
+    SDL_Rect window_size;
 
+public:
     // Engine class will be a singleton
     static Engine *Instance() {
         if (!instance) {
@@ -49,5 +49,7 @@ public:
     void Free();
 
     bool isRunning() { return running; }
+
+    SDL_Rect WindowSize() { return window_size; }
 };
 

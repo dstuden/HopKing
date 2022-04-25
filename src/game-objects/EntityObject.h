@@ -6,7 +6,7 @@
 
 class EntityObject : public GameObject {
 protected:
-    int lives = 0; // object is still alive at 0 lives
+    int lives = 0;
     bool invulnerable = false;
     uint32_t invulnerable_start;
     uint32_t invulnerability_duration = 1000; // 1 second
@@ -14,7 +14,7 @@ protected:
 public:
 
     virtual ~EntityObject() override {
-        std::cout<<"Removed Entity\n";
+        std::cout << "Removed Entity\n";
     }
 
     void Update() override {}
@@ -36,9 +36,14 @@ public:
         lives++;
     }
 
+    int GetLives() {
+        return lives;
+    }
+
     bool isInvoulnerable() { return invulnerable; }
 
     virtual void Hit(uint32_t invulnerability_duration) override {}
+
     virtual void Hit() override {}
 
 };

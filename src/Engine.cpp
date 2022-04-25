@@ -28,7 +28,7 @@ bool Engine::Init(const char *title, int width, int height, int flags) {
     renderer = SDL_CreateRenderer(
             window,
             -1,
-            SDL_RENDERER_ACCELERATED
+            SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 
     if (!renderer) {
@@ -37,7 +37,9 @@ bool Engine::Init(const char *title, int width, int height, int flags) {
     }
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    SceneManager::Instance()->PushScene(new MenuScene);
+    SDL_GetWindowSize(Engine::Instance()->getWindow(), &window_size.w, &window_size.h);
+
+    SceneManager::Instance()->PushScene(new PlayScene);
 
     running = true;
     return true;

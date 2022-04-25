@@ -6,13 +6,17 @@
 const float delay_ms = 16.6666666667f; // 60 fps
 
 int main() {
+    bool fullscreen = 0;
+    std::cout << "Start in fullscreen? [0/1] ";
+    std::cin >> fullscreen;
+
     if (
             !Engine::Instance()->Init
                     (
                             "Hop King",
-                            1024,
-                            768,
-                            0
+                            1920,
+                            1080,
+                            fullscreen
                     )
             )
         return -1;
@@ -29,7 +33,7 @@ int main() {
         end = SDL_GetPerformanceCounter();
         float elapsed_ms = (end - start) / (float) SDL_GetPerformanceFrequency() * 1000.0f;
 
-        SDL_Delay(delay_ms - (elapsed_ms >= delay_ms ? 0 : elapsed_ms));
+        SDL_Delay(delay_ms - (elapsed_ms >= delay_ms ? 0 : elapsed_ms)); // in case of no v-sync
 
 //        end = SDL_GetPerformanceCounter();
 //        float elapsed = (end - start) / (float) SDL_GetPerformanceFrequency();

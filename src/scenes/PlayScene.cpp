@@ -5,14 +5,6 @@
 std::string PlayScene::ID = "PLAY";
 
 void PlayScene::Update() {
-    static int button = 0;
-
-// need to check for release of a key...
-//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_DOWN) && button < num_of_buttons - 1)
-//        button++;
-//    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_UP) && button > 0)
-//        button--;
-
     int max_size = game_objects.size();
     for (int i = 0; i < max_size;) {
         if (game_objects[i]->IsDead()) {
@@ -31,17 +23,33 @@ void PlayScene::Draw() {
     for (auto &it: game_objects) {
         it->Draw();
     }
+    for (int i = 0; i < controller_lives; i++) {
+        TextureManager::Instance()->Draw(
+                "heart",
+                10+70*i,
+                10,
+                64,
+                64,
+                Engine::Instance()->getRenderer(),
+                0,
+                SDL_FLIP_NONE
+        );
+    }
 }
 
 void PlayScene::OnEnter() {
     TextureManager::Instance()->Load("../assets/player.png", "player", Engine::Instance()->getRenderer());
     TextureManager::Instance()->Load("../assets/platform1.png", "platform1", Engine::Instance()->getRenderer());
+    TextureManager::Instance()->Load("../assets/background.png", "background", Engine::Instance()->getRenderer());
+    TextureManager::Instance()->Load("../assets/heart.png", "heart", Engine::Instance()->getRenderer());
     texture_id_list.push_back("player");
+    texture_id_list.push_back("background");
+    texture_id_list.push_back("heart");
     texture_id_list.push_back("platform1");
 
     Player *player1 = new Player(
             this,
-            100,
+            (Engine::Instance()->WindowSize().w / 2) - 32,
             300,
             32,
             64,
@@ -53,8 +61,8 @@ void PlayScene::OnEnter() {
 
     Enemy *enemy1 = new Enemy(
             this,
-            300,
-            300,
+            100,
+            200,
             32,
             64,
             1,
@@ -66,8 +74,8 @@ void PlayScene::OnEnter() {
     Platform *platform1 = new Platform(
             this,
             0,
-            600,
-            640,
+            800,
+            20000,
             64,
             1,
             1,
@@ -79,13 +87,26 @@ void PlayScene::OnEnter() {
             400,
             400,
             64,
-            64,
+            128,
             1,
             1,
             "platform1"
     );
 
+    Background *background = new Background(
+            this,
+            -100,
+            0,
+            3840,
+            1080,
+            1,
+            1,
+            "background"
+    );
 
+    controller_lives = player1->GetLives();
+
+    game_objects.push_back(background);
     game_objects.push_back(platform1);
     game_objects.push_back(platform2);
     game_objects.push_back(enemy1);
@@ -95,17 +116,17 @@ void PlayScene::OnEnter() {
 }
 
 void PlayScene::OnExit() {
-    for (auto &it : game_objects) {
+    for (auto &it: game_objects) {
         it->Free();
         delete it;
     }
     game_objects.clear();
 
-    for (auto &it: texture_id_list){
-        std::cout<<it<<std::endl;
+    for (auto &it: texture_id_list) {
         TextureManager::Instance()->FreeFromTextureMap(it);
-
     }
+
+    dead = true;
 }
 
 std::string PlayScene::GetStateID() { return ID; }

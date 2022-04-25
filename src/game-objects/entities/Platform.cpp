@@ -35,16 +35,6 @@ void Platform::Update() {
 
 }
 
-void Platform::CheckCollision() {
-    for (auto &it: this->parrent_scene->GetGameObjects()) {
-        if (this->GetObjectID() == it->GetObjectID()) continue;
-
-        if (SDL_HasIntersection(this->GetRect(), it->GetRect())) {
-
-        }
-    }
-}
-
 void Platform::Draw() {
     TextureManager::Instance()->DrawTile(texture_ID, position.getX(), position.getY(), 64, 64, width, height,
                                          Engine::Instance()->getRenderer(), SDL_FLIP_NONE);

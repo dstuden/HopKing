@@ -30,18 +30,23 @@ Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, in
 }
 
 void Player::Update() {
+    if (position.getY() > Engine::Instance()->WindowSize().h + 100) { // fell off the map
+        lives = 0;
+    }
+
     int x_old = position.getX();
 
     if (lives <= 0) {
         Free();
+        parrent_scene->MoveScene(0); // prevent the camera from moving after death
         return;
     }
 
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_D)) {
-        velocity.setX(5);
+        velocity.setX(8);
     }
     if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_A)) {
-        velocity.setX(-5);
+        velocity.setX(-8);
     }
 
     velocity.setY(0);
@@ -49,7 +54,7 @@ void Player::Update() {
     collider.x = position.getX();
     CheckCollision(); // only for calculating how much the map should move
 
-    parrent_scene->MoveScene(position.getX()-x_old);
+    parrent_scene->MoveScene(position.getX() - x_old);
     position.setX(x_old);
 
     if (isFalling()) {
@@ -77,6 +82,7 @@ void Player::Update() {
         }
     }
 
+    parrent_scene->SetControllerLives(lives);
     current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
 }
 
@@ -86,6 +92,7 @@ void Player::Draw() {
 
 void Player::Free() {
     EntityObject::Free();
+    parrent_scene->SetControllerLives(0);
 }
 
 void Player::CheckCollision() {

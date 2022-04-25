@@ -1,13 +1,9 @@
 #pragma once
 
 #include "GameScene.h"
-#include "../utils/TextureManager.h"
-#include <vector>
 
 class MenuScene : public GameScene {
-
     static std::string ID;
-
 public:
     void Update() override;
 
@@ -19,3 +15,4 @@ public:
 
     std::string GetStateID() override;
 };
+
