@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include "iostream"
 
 #include "utils/InputManager.h"
@@ -23,10 +25,11 @@ private:
 
     static Engine *instance;
 
-    Engine() =default;
+    Engine() = default;
+
+    SDL_Rect window_size;
 
 public:
-
     // Engine class will be a singleton
     static Engine *Instance() {
         if (!instance) {
@@ -48,5 +51,9 @@ public:
     void Free();
 
     bool isRunning() { return running; }
+
+    void Kill() { running = false; }
+
+    SDL_Rect WindowSize() { return window_size; }
 };
 
