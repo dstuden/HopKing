@@ -1,9 +1,9 @@
 #include "Player.h"
 #include "../../utils/InputManager.h"
 #include "../../Engine.h"
-#include "../../scenes/Scenes.h"
+#include "../../scenes/PlayScene.h"
 
-Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
+Player::Player(PlayScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
                int num_frames, std::string texture_ID, int lives) {
     object_ID = "Player";
 
@@ -32,6 +32,7 @@ Player::Player(GameScene *parrent_scene, int x, int y, int width, int height, in
 void Player::Update() {
     if (position.getY() > Engine::Instance()->WindowSize().h + 100) { // fell off the map
         lives = 0;
+        parrent_scene->SetControllerLives(0);
     }
 
     int x_old = position.getX();
@@ -73,16 +74,23 @@ void Player::Update() {
     velocity.setX(0);
     position.setY(position.getY() + velocity.getY());
     collider.y = position.getY();
+    falling = true;
     CheckCollision();
 
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_SPACE)) {
+    if (!InputManager::Instance()->GetKeyState(SDL_SCANCODE_SPACE))
+        InputManager::Instance()->SetKey(SDL_SCANCODE_SPACE, false);
+
+    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_SPACE) &&
+        !InputManager::Instance()->KeyPressed(SDL_SCANCODE_SPACE)) {
         if (!isJumping() && !isFalling()) {
+            InputManager::Instance()->SetKey(SDL_SCANCODE_SPACE, true);
             jumping = true;
             jump_start = SDL_GetTicks();
         }
     }
 
     parrent_scene->SetControllerLives(lives);
+    parrent_scene->SetPlayerPos(position);
     current_frame = int(((SDL_GetTicks() / animation_speed) % num_frames));
 }
 
@@ -92,12 +100,9 @@ void Player::Draw() {
 
 void Player::Free() {
     EntityObject::Free();
-    parrent_scene->SetControllerLives(0);
 }
 
 void Player::CheckCollision() {
-    falling = true;
-
     for (auto &it: this->parrent_scene->GetGameObjects()) {
         if (this->GetID() == it->GetID()) continue;
 
@@ -107,6 +112,8 @@ void Player::CheckCollision() {
                     this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15) // 15 is the jump height
                 {
                     it->Hit();
+                    if (it->GetLives() <= 0)
+                        AddPoints(5); // enemy kill is 5 points
                     invulnerable = true;
                     invulnerability_duration = 1000;
                     invulnerable_start = SDL_GetTicks();
@@ -119,8 +126,28 @@ void Player::CheckCollision() {
                     invulnerable = false;
             }
 
-            if (it->GetObjectID() == "LifeUp") {
+            if (it->GetObjectID() == "HealthUp") {
                 EntityObject::AddLife();
+                it->Free();
+            }
+
+            if (it->GetObjectID() == "Animal") {
+                it->Free();
+                AddPoints(10); // animal saved = 10 pts
+            }
+
+            if (it->GetObjectID() == "Spike") {
+                Hit(1000);
+
+                Uint32 invulnerable_now = SDL_GetTicks() - invulnerable_start;
+                if (invulnerable_now > invulnerability_duration)
+                    invulnerable = false;
+            }
+
+            if (it->GetObjectID() == "EndCheckpoint") {
+                parrent_scene->SetControllerLives(lives);
+                parrent_scene->CompleteLevel();
+                parrent_scene->SetPlayerPoints(points);
             }
 
             if (it->GetObjectID() == "Platform") {

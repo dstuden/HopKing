@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "scenes/SceneManager.h"
-#include "scenes/Scenes.h"
+#include "scenes/MenuScene.h"
+#include "scenes/MenuScene.h"
 
 Engine *Engine::instance = NULL;
 
@@ -10,11 +11,15 @@ bool Engine::Init(const char *title, int width, int height, int flags) {
         SDL_Log("Unable to initialize SDL: %s\n", SDL_GetError());
         return false;
     }
+    if(TTF_Init() != 0) {
+        SDL_Log("Unable to initialize SDL TTF: %s\n", SDL_GetError());
+        return false;
+    }
 
     window = SDL_CreateWindow(
             title,
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
             width,
             height,
             flags
@@ -39,7 +44,7 @@ bool Engine::Init(const char *title, int width, int height, int flags) {
 
     SDL_GetWindowSize(Engine::Instance()->getWindow(), &window_size.w, &window_size.h);
 
-    SceneManager::Instance()->PushScene(new PlayScene);
+    SceneManager::Instance()->PushScene(new MenuScene);
 
     running = true;
     return true;
@@ -61,8 +66,6 @@ void Engine::HandleEvents() {
                 break;
         }
     }
-    if (InputManager::Instance()->GetKeyState(SDL_SCANCODE_RETURN))
-        SceneManager::Instance()->PopScene();
 }
 
 void Engine::Render() {
@@ -86,6 +89,7 @@ void Engine::Free() {
     std::cout << "Renderer destroyed!\n";
     SDL_DestroyWindow(window);
     std::cout << "Window destroyed!\n";
+    TTF_Quit();
     SDL_Quit();
     std::cout << "\nCleanup successful!\n";
 }

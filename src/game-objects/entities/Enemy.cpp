@@ -1,7 +1,7 @@
 #include "Enemy.h"
-#include "../../scenes/Scenes.h"
+#include "../../scenes/PlayScene.h"
 
-Enemy::Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
+Enemy::Enemy(PlayScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
              int num_frames, std::string texture_ID, int lives) {
     object_ID = "Enemy";
 

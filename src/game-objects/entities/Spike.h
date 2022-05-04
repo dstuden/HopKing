@@ -2,13 +2,12 @@
 
 #include "../EntityObject.h"
 
-class Platform : public EntityObject {
-
+class Spike : public EntityObject {
     int texture_width;
     int texture_height;
 
 public:
-    Platform(GameScene *parrent_scene, int x, int y, int width, int height, int texture_width, int texture_height,
+    Spike(GameScene *parrent_scene, int x, int y, int width, int height, int texture_width, int texture_height,
              int animation_speed, int num_frames,
              std::string texture_ID);
 

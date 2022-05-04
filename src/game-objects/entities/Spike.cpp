@@ -1,12 +1,12 @@
-#include "Platform.h"
+#include "Spike.h"
 #include "../../scenes/GameScene.h"
 #include "../../utils/TextureManager.h"
 #include "../../Engine.h"
 
-Platform::Platform(GameScene *parrent_scene, int x, int y, int width, int height, int texture_width, int texture_height,
-                   int animation_speed, int num_frames,
-                   std::string texture_ID) {
-    object_ID = "Platform";
+Spike::Spike(GameScene *parrent_scene, int x, int y, int width, int height, int texture_width, int texture_height,
+             int animation_speed, int num_frames,
+             std::string texture_ID) {
+    object_ID = "Spike";
 
     this->parrent_scene = parrent_scene;
 
@@ -28,7 +28,7 @@ Platform::Platform(GameScene *parrent_scene, int x, int y, int width, int height
     this->texture_ID = texture_ID;
 }
 
-void Platform::Update() {
+void Spike::Update() {
 
     position.setX(position.getX() - parrent_scene->ScenePos());
 
@@ -39,12 +39,12 @@ void Platform::Update() {
 
 }
 
-void Platform::Draw() {
+void Spike::Draw() {
     TextureManager::Instance()->DrawTile(texture_ID, position.getX(), position.getY(), texture_width, texture_height,
                                          width, height,
                                          Engine::Instance()->getRenderer(), SDL_FLIP_NONE);
 }
 
-void Platform::Free() {
+void Spike::Free() {
     EntityObject::Free();
 }

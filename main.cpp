@@ -14,8 +14,8 @@ int main() {
             !Engine::Instance()->Init
                     (
                             "Hop King",
-                            1920,
-                            1080,
+                            1024,
+                            678,
                             fullscreen
                     )
             )

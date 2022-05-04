@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 
-class GameObject;
+class EntityObject;
 
 class GameScene {
 protected:
     std::vector<std::string> texture_id_list;
-    std::vector<GameObject *> game_objects;
+    std::vector<EntityObject *> game_objects;
     bool dead = false;
     int scene_controller_pos_diff_x = 0;
     int controller_lives = 0;
@@ -29,7 +29,7 @@ public:
 
     virtual std::string GetStateID() { return ""; }
 
-    std::vector<GameObject *> GetGameObjects() { return game_objects; }
+    std::vector<EntityObject *> GetGameObjects() { return game_objects; }
 
     int GetControllerLives() {
         return controller_lives;
@@ -40,6 +40,8 @@ public:
     }
 
     bool isDead() { return dead; }
+
+    void Die() { dead = true; }
 
     void MoveScene(int diff) { scene_controller_pos_diff_x = diff; }
 

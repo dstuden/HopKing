@@ -21,8 +21,6 @@ public:
 
     void PopScene();
 
-    void ChangeScene(GameScene *scene);
-
     void PushScene(GameScene *scene);
 
     void CleanScenes();
@@ -30,4 +28,6 @@ public:
     void Update();
 
     void Render();
+
+    void KillBack() { game_scenes.back()->Die(); }
 };

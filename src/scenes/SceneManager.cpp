@@ -2,12 +2,6 @@
 
 SceneManager *SceneManager::instance = NULL;
 
-void SceneManager::ChangeScene(GameScene *scene) {
-    PopScene();
-    PushScene(scene);
-    game_scenes.back()->OnEnter();
-}
-
 void SceneManager::CleanScenes() {
     if (!game_scenes.empty()) {
         for (auto &it: game_scenes) {
@@ -32,15 +26,13 @@ void SceneManager::PushScene(GameScene *scene) {
 }
 
 void SceneManager::Update() {
-    if (!game_scenes.empty()) {
+    for (auto &it: game_scenes) {
         if (game_scenes.back()->isDead())
-        {
-            delete game_scenes.back();
-            game_scenes.pop_back();
-        }
-        else
-            game_scenes.back()->Update();
+            game_scenes.back()->OnExit();
     }
+    if (!game_scenes.empty())
+        game_scenes.back()->Update();
+
 }
 
 void SceneManager::Render() {

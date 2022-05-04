@@ -3,11 +3,14 @@
 #include "../EntityObject.h"
 #include <iostream>
 
+class PlayScene;
+
 class Enemy : public EntityObject {
     bool falling = true;
     bool direction = false; // right = false, left = true
+    PlayScene *parrent_scene;
 public:
-    Enemy(GameScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
+    Enemy(PlayScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
           int num_frames, std::string texture_ID, int lives);
 
     virtual void Update() override;

@@ -51,8 +51,9 @@ public:
 
     Vector2D GetVelocity() { return velocity; }
 
-    virtual void Hit() = 0;
-    virtual void Hit(uint32_t invulnerability_duration) = 0;
+    virtual void Hit() {}
+
+    virtual void Hit(uint32_t invulnerability_duration) {}
 
     virtual void Free() = 0;
 

@@ -10,4 +10,5 @@ bool InputManager::GetKeyState(SDL_Scancode code) {
 }
 
 void InputManager::Free() {
+    delete instance;
 }
