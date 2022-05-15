@@ -63,8 +63,9 @@ void Player::Update() {
     }
 
     if (isJumping()) {
-        if (SDL_GetTicks() - jump_start < 250) {
-            velocity.setY(-15);
+        if (jump_acc >= 0) {
+            velocity.setY(-jump_acc);
+            jump_acc--;
         } else {
             falling = true;
             jumping = false;
@@ -85,7 +86,7 @@ void Player::Update() {
         if (!isJumping() && !isFalling()) {
             InputManager::Instance()->SetKey(SDL_SCANCODE_SPACE, true);
             jumping = true;
-            jump_start = SDL_GetTicks();
+            jump_acc = 21;
         }
     }
 
@@ -109,7 +110,7 @@ void Player::CheckCollision() {
         if (SDL_HasIntersection(this->GetRect(), it->GetRect())) {
             if (it->GetObjectID() == "Enemy") {
                 if (velocity.getY() > 0 &&
-                    this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15) // 15 is the jump height
+                    this->GetRect()->y + this->GetRect()->h <= it->GetRect()->y + 15)
                 {
                     it->Hit();
                     if (it->GetLives() <= 0)

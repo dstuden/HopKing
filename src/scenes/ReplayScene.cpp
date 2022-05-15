@@ -4,13 +4,6 @@
 
 std::string ReplayScene::ID = "REPLAY";
 
-struct PlayerSave {
-    char player_name[6];
-    int level;
-    int points;
-    int lives;
-};
-
 void ReplayScene::Update() {
     if (!(data >> scene_controller_pos_diff_x >> player_y)) {
         data.close();

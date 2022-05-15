@@ -13,7 +13,7 @@ class Player : public EntityObject {
 
     PlayScene *parrent_scene;
 
-    Uint32 jump_start;
+    int jump_acc = 21;
 public:
     Player(PlayScene *parrent_scene, int x, int y, int width, int height, int animation_speed,
            int num_frames, std::string texture_ID, int lives);
